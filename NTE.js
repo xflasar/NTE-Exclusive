@@ -48,7 +48,6 @@ client.on(Events.InteractionCreate, async interaction => {
 
 // Exclamation mark commands
 //#region Exclamation commands
-client.commands = new Collection()
 
 const commandFiles = fs.readdirSync('./exclamation-mark-commands/commands').filter(file => file.endsWith('.js'))
 
@@ -60,9 +59,9 @@ for (const file of commandFiles) {
 const exclamationPrefix = '!'
 
 client.on('messageCreate', message => {
-	if (!message.content.startsWith(prefix) || message.author.bot) return
+	if (!message.content.startsWith(exclamationPrefix) || message.author.bot) return
 
-	const args = message.content.slice(prefix.length).trim().split(/ +/)
+	const args = message.content.slice(exclamationPrefix.length).trim().split(/ +/)
 	const commandName = args.shift().toLowerCase()
 	const command = client.commands.get(commandName)
 
